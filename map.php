@@ -7,6 +7,9 @@ use Autonomous\Controllers\MainController;
 
 class CliSetup extends CLI
 {
+    // override the default log level
+    protected $logdefault = 'info';
+
     // register options and arguments
     protected function setup(Options $options)
     {
