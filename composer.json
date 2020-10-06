@@ -1,4 +1,5 @@
 {
+	"name": "driving-task/autonomous-car",
     "require": {
         "splitbrain/php-cli": "^1.1"
     },
