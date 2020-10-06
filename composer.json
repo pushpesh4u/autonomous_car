@@ -1,0 +1,5 @@
+{
+    "require": {
+        "splitbrain/php-cli": "^1.1"
+    }
+}
