@@ -3,16 +3,19 @@ require __DIR__ . '/vendor/autoload.php';
 use splitbrain\phpcli\CLI;
 use splitbrain\phpcli\Options;
 
+use Autonomous\Controllers\MainController;
+
 class CliSetup extends CLI
-{
+{	
     // register options and arguments
     protected function setup(Options $options)
     {
+		$m = new MainController();echo $m->a();
         $options->setHelp('Find the mapping time, times refuelled and distance travelled for an autonomous car for a given set of options.');
 
         $options->registerOption('version', 'print version', 'v');
-		$options->registerOption('road_type', 'Type of road. Can be "rural" or "urban"', 't');
-		$options->registerOption('road_length', 'Max. distance to travel (in kms)', 'd');
+		$options->registerOption('road_type', 'Type of road. Can be "rural" or "urban"', 't', 'rural|urban');
+		$options->registerOption('road_length', 'Max. distance to travel (in kms)', 'd', 'distance');
     }
 
     // implement your code
