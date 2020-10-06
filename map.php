@@ -4,6 +4,7 @@ use splitbrain\phpcli\CLI;
 use splitbrain\phpcli\Options;
 
 use Autonomous\Controllers\MainController;
+use Autonomous\Controllers\Constants\Tracking;
 
 class CliSetup extends CLI
 {
@@ -28,7 +29,7 @@ class CliSetup extends CLI
 		$road_type = trim( $options->getOpt('road_type') ) ?? '';
 		$distance = ( int ) trim( $options->getOpt('road_length') ) ?? '';
 		
-		if( !in_array( $road_type, ['rural','urban'] ) ) {
+		if( !in_array( $road_type, [ Tracking::URBAN_ROAD, Tracking::RURAL_ROAD ] ) ) {
 			$road_type = false;
 		}
 		
@@ -44,6 +45,10 @@ class CliSetup extends CLI
         } else {
 			$cal = new MainController( $road_type, $distance );
 			list( $timeSpent, $timeRefuelled, $distanceTravelled ) = $cal->getMetrics();
+
+			$this->success( 'Total time spent on the mapping task : ' . $timeSpent );
+			$this->success( 'Number of times refulled : ' . $timeRefuelled );
+			$this->success( 'Total distance travelled : ' . $distanceTravelled );
 		}
 
 		$this->colors->disable();

@@ -1,0 +1,15 @@
+<?php
+namespace Autonomous\Controllers\Constants;
+
+class Tracking {
+	const URBAN_ROAD = 'urban';
+	const RURAL_ROAD = 'rural';
+	const MAX_TRAVEL_DISTANCE_AFTER_REFUELING = 200;
+	const URBAN_RANGE_TRAFFIC_DEPRECIATION_PERCENT = 0.25;
+	const DISTANCE_GARAGE_TO_URBAN_AREA = 20;
+	const DISTANCE_GARAGE_TO_RURAL_AREA = 50;
+	const REFUEL_ROUND_TRIP_DISTANCE = 10;
+	const TIME_TO_REFUEL_MINS = 30;
+	const SPEED_LIMIT_KMPH = 70;
+	const SPEED_LIMIT_RURAL_RELAXATION_PERCENT = 0.15;
+}

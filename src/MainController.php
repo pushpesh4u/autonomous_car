@@ -14,4 +14,13 @@ class MainController {
 		// TODO
 		return ['','',''];
 	}
+
+	private function getGarageDistance() {
+		switch( $this->roadType ) {
+			case 'urban':
+				break;
+			case 'rural':
+				break;
+		}
+	}
 }
