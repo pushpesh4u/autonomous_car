@@ -1,6 +1,8 @@
 <?php
 namespace Autonomous\Controllers;
 
+use Autonomous\Controllers\Constants\Tracking;
+
 class MainController {
 	private $roadType;
 	private $distance;
@@ -17,9 +19,9 @@ class MainController {
 
 	private function getGarageDistance() {
 		switch( $this->roadType ) {
-			case 'urban':
+			case Tracking::URBAN_ROAD:
 				break;
-			case 'rural':
+			case Tracking::RURAL_ROAD:
 				break;
 		}
 	}
