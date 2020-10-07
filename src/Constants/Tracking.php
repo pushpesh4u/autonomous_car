@@ -13,4 +13,5 @@ class Tracking {
 	const TIME_TO_REFUEL_MINS = 30;
 	const SPEED_LIMIT_KMPH = 70;
 	const SPEED_LIMIT_RURAL_RELAXATION_PERCENT = 0.15;
+	const MINUTES_PER_HOUR = 60;
 }

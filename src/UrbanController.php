@@ -45,15 +45,18 @@ class UrbanController implements RoadInterface {
 				$totalDistanceTraveled += 2 * Tracking::REFUEL_ROUND_TRIP_DISTANCE;
 				$totalDistanceToTravel -= 2 * Tracking::REFUEL_ROUND_TRIP_DISTANCE;
 				$totalTimeSpent += Tracking::TIME_TO_REFUEL_MINS;
-			} else {
-				
+			}
+
+			$totalTimeSpent += round( Tracking::MINUTES_PER_HOUR / $this->getSpeedLimit(), 2 );
+			if( $totalDistanceTraveled == $this->getSpeedLimit() ) {
+				// $totalTimeSpent += Tracking::MINUTES_PER_HOUR;
 			}
 		}
 
 		// this is traveled after the mapping while going back to the garage
 		$totalDistanceTraveled += $distanceOfRoadFromGarage;
 
-		return [ $totalTimeSpent, $numTimesRefueled, $totalDistanceTraveled ];
+		return [ round( $totalTimeSpent, 2 ), $numTimesRefueled, $totalDistanceTraveled ];
 	}
 
 	public function getGarageDistance() {
@@ -61,7 +64,7 @@ class UrbanController implements RoadInterface {
 	}
 
 	public function getDistanceBeforeRefuel() {
-		return Tracking::MAX_TRAVEL_DISTANCE_AFTER_REFUELING * (1 - Tracking::RURAL_RANGE_TRAFFIC_DEPRECIATION_PERCENT);
+		return Tracking::MAX_TRAVEL_DISTANCE_AFTER_REFUELING * (1 - Tracking::URBAN_RANGE_TRAFFIC_DEPRECIATION_PERCENT);
 	}
 
 	public function getSpeedLimit() {
