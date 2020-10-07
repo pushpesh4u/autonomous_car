@@ -29,4 +29,12 @@ class RuralController implements RoadInterface {
 	public function getGarageDistance() {
 		return Tracking::DISTANCE_GARAGE_TO_RURAL_AREA;
 	}
+
+	public function getDistanceBeforeRefuel() {
+		return $this->distanceToCover * (1 - Tracking::URBAN_RANGE_TRAFFIC_DEPRECIATION_PERCENT);
+	}
+
+	public function getSpeedLimit() {
+		return Tracking::SPEED_LIMIT_KMPH * ( 1 + Tracking::SPEED_LIMIT_RURAL_RELAXATION_PERCENT );
+	}
 }

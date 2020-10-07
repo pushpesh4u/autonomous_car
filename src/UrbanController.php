@@ -29,4 +29,12 @@ class UrbanController implements RoadInterface {
 	public function getGarageDistance() {
 		return Tracking::DISTANCE_GARAGE_TO_URBAN_AREA;
 	}
+
+	public function getDistanceBeforeRefuel() {
+		return $this->distanceToCover * (1 - Tracking::RURAL_RANGE_TRAFFIC_DEPRECIATION_PERCENT);
+	}
+
+	public function getSpeedLimit() {
+		return Tracking::SPEED_LIMIT_KMPH;
+	}
 }
