@@ -9,3 +9,5 @@
 **To run tests**
 * windows - `vendor\bin\phpunit`
 * unix - `./vendor/bin/phpunit`
+
+![alt text](https://github.com/pushpesh4u/autonomous_car/blob/main/resources/options.PNG?raw=true)
