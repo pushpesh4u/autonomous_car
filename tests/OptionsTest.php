@@ -1,6 +1,4 @@
 <?php
-namespace Autonomous\Controllers\Tests;
-
 use splitbrain\phpcli\CLI;
 use splitbrain\phpcli\Options;
 
