@@ -48,9 +48,6 @@ class RuralController implements RoadInterface {
 			}
 
 			$totalTimeSpent += round( Tracking::MINUTES_PER_HOUR / $this->getSpeedLimit(), 2 );
-			if( $totalDistanceTraveled == $this->getSpeedLimit() ) {
-				// $totalTimeSpent += Tracking::MINUTES_PER_HOUR;
-			}
 		}
 
 		// this is traveled after the mapping while going back to the garage
