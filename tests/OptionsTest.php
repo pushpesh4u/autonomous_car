@@ -1,8 +1,6 @@
 <?php
 namespace Autonomous\Controllers\Tests;
 
-require __DIR__ . '/../vendor/autoload.php';
-
 use splitbrain\phpcli\CLI;
 use splitbrain\phpcli\Options;
 
