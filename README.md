@@ -5,3 +5,7 @@
 	* `composer install`
 	* `composer dump-autoload`
 * Run `php map.php` to see the available options
+
+**To run tests**
+* windows - `vendor\bin\phpunit tests`
+* unix - `./vendor/bin/phpunit tests`

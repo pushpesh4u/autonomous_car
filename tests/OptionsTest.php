@@ -12,7 +12,7 @@ class OptionsTestChild extends Options
     public $args;
 }
 
-class OptionsTest extends \PHPUnit_Framework_TestCase
+class OptionsTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -34,7 +34,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $options->parseOptions();
 
         $this->assertEquals($value, $options->getOpt('exclude'));
-        $this->assertEquals(array($argument), $options->args);
+        $this->assertEquals([$argument], $options->args);
         $this->assertFalse($options->getOpt('nothing'));
     }
 
