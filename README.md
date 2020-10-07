@@ -7,5 +7,5 @@
 * Run `php map.php` to see the available options
 
 **To run tests**
-* windows - `vendor\bin\phpunit tests`
-* unix - `./vendor/bin/phpunit tests`
+* windows - `vendor\bin\phpunit`
+* unix - `./vendor/bin/phpunit`
