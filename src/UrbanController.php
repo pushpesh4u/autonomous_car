@@ -20,10 +20,40 @@ class UrbanController implements RoadInterface {
 	}
 
 	public function getMetrics() : array {
-		$result = [ '', '', '' ];
+		$totalTimeSpent = 0;
+		$numTimesRefueled = 0;
+		$totalDistanceTraveled = 0;
 
-		// TODO
-		return $result;
+		/**
+		 * Car starts from a garage.
+		 * At this point, assume the fuel tank is full
+		 * Car should return to the garage for the task to complete
+		 * or the distance specified should be traveled.
+		 */
+		
+		// discount the distance of the road from the garage. Going from the garage to the road and coming back
+		$distanceOfRoadFromGarage = $this->getGarageDistance();
+
+		$totalDistanceToTravel = $this->distanceToCover - 2 * $distanceOfRoadFromGarage;
+
+		// this is already traveled before starting the mapping
+		$totalDistanceTraveled += $distanceOfRoadFromGarage;
+
+		for( $i = 1; ( $i < $totalDistanceToTravel ) && ( $totalDistanceToTravel > 0 ); $i--, $totalDistanceTraveled++, $totalDistanceToTravel-- ) {
+			if( $totalDistanceTraveled == ( 1 + $numTimesRefueled ) * $this->getDistanceBeforeRefuel() ) {
+				$numTimesRefueled++;
+				$totalDistanceTraveled += 2 * Tracking::REFUEL_ROUND_TRIP_DISTANCE;
+				$totalDistanceToTravel -= 2 * Tracking::REFUEL_ROUND_TRIP_DISTANCE;
+				$totalTimeSpent += Tracking::TIME_TO_REFUEL_MINS;
+			} else {
+				
+			}
+		}
+
+		// this is traveled after the mapping while going back to the garage
+		$totalDistanceTraveled += $distanceOfRoadFromGarage;
+
+		return [ $totalTimeSpent, $numTimesRefueled, $totalDistanceTraveled ];
 	}
 
 	public function getGarageDistance() {
@@ -31,7 +61,7 @@ class UrbanController implements RoadInterface {
 	}
 
 	public function getDistanceBeforeRefuel() {
-		return $this->distanceToCover * (1 - Tracking::RURAL_RANGE_TRAFFIC_DEPRECIATION_PERCENT);
+		return Tracking::MAX_TRAVEL_DISTANCE_AFTER_REFUELING * (1 - Tracking::RURAL_RANGE_TRAFFIC_DEPRECIATION_PERCENT);
 	}
 
 	public function getSpeedLimit() {
