@@ -9,26 +9,9 @@ class MainController {
 	 */
 	private $roadType;
 
-	/**
-	 * Total distance(max) to be covered
-	 */
-	private $distanceToCover;
-
-	/**
-	 * Distance of garage
-	 */
-	private $garageDistance;
-
-	/**
-	 * Car starts with a full tank
-	 */
-	private $fuelStatus = 1;
-
 	public function __construct( string $roadType, int $distanceToCover ) {
 		$this->roadType = $roadType;
 		$this->distanceToCover = $distanceToCover;
-
-		$this->garageDistance = $this->getGarageDistance();
 	}
 
 	public function getMetrics() : array {
@@ -36,25 +19,14 @@ class MainController {
 
 		switch( $this->roadType ) {
 			case Tracking::URBAN_ROAD:
-				$obj = new UrbanController();
+				$obj = new UrbanController($this->distanceToCover);
 				break;
 			case Tracking::RURAL_ROAD:
-				$obj = new RuralController();
+				$obj = new RuralController($this->distanceToCover);
 				break;
 		}
 
 		$result = $obj->getMetrics();
 		return $result;
-	}
-
-	private function getGarageDistance() : int {
-		switch( $this->roadType ) {
-			case Tracking::URBAN_ROAD:
-				return Tracking::DISTANCE_GARAGE_TO_URBAN_AREA;
-				break;
-			case Tracking::RURAL_ROAD:
-				return Tracking::DISTANCE_GARAGE_TO_RURAL_AREA;
-				break;
-		}
 	}
 }

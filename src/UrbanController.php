@@ -6,11 +6,6 @@ use Autonomous\Controllers\Common\RoadInterface;
 
 class UrbanController implements RoadInterface {
 	/**
-	 * Type of road to be covered
-	 */
-	private $roadType;
-
-	/**
 	 * Total distance(max) to be covered
 	 */
 	private $distanceToCover;
@@ -20,9 +15,8 @@ class UrbanController implements RoadInterface {
 	 */
 	private $fuelStatus = 1;
 
-	public function __construct() {
-		//$this->roadType = $roadType;
-		//$this->distanceToCover = $distanceToCover;
+	public function __construct( int $distanceToCover ) {
+		$this->distanceToCover = $distanceToCover;
 	}
 
 	public function getMetrics() : array {
