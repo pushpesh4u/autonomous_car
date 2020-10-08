@@ -114,8 +114,7 @@ class RuralController implements RoadInterface {
 		echo "==========================" . PHP_EOL;
 		$totalTimeSpent = $this->distanceToCover / $this->getSpeedLimit()  + ((2 * $distanceOfRoadFromGarage) / Tracking::SPEED_LIMIT_KMPH) +  ($distance_travelled_in_refuelling / $this->getSpeedLimit()) + ($numTimesRefueled * Tracking::TIME_TO_REFUEL_HOURS);
 
-
-		return [ $totalTimeSpent, $numTimesRefueled, $totalDistanceTraveled ];
+		return [ round( $totalTimeSpent, 2 ), $numTimesRefueled, $totalDistanceTraveled ];
 	}
 
 	public function getGarageDistance() {
