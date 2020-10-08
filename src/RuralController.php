@@ -96,10 +96,26 @@ class RuralController implements RoadInterface {
 		$distance_travelled_in_refuelling = ($numTimesRefueled * Tracking::REFUEL_ROUND_TRIP_DISTANCE);
 
 		$totalDistanceTraveled = $this->distanceToCover + (2 * $distanceOfRoadFromGarage) +  $distance_travelled_in_refuelling;
-		$totalTimeSpent = $this->distanceToCover / $this->getSpeedLimit()  + ((2 * $distanceOfRoadFromGarage) / Tracking::SPEED_LIMIT_KMPH) +  ($distance_travelled_in_refuelling / $this->getSpeedLimit());
+		echo "==========================" . PHP_EOL;
+		echo $this->getSpeedLimit(). PHP_EOL;
+		echo "==========================" . PHP_EOL;
+
+		// TIME 1
+		echo $this->distanceToCover / $this->getSpeedLimit(). PHP_EOL;
+		// TIME 2
+		echo (2 * $distanceOfRoadFromGarage) / Tracking::SPEED_LIMIT_KMPH . PHP_EOL;
+		// TIME 3
+		echo ($distance_travelled_in_refuelling / $this->getSpeedLimit()). PHP_EOL;
+		// TIME 4 
+		echo $numTimesRefueled * Tracking::TIME_TO_REFUEL_MINS;
 
 
-		return [ round( $totalTimeSpent, 2 ), $numTimesRefueled, $totalDistanceTraveled ];
+
+		echo "==========================" . PHP_EOL;
+		$totalTimeSpent = $this->distanceToCover / $this->getSpeedLimit()  + ((2 * $distanceOfRoadFromGarage) / Tracking::SPEED_LIMIT_KMPH) +  ($distance_travelled_in_refuelling / $this->getSpeedLimit()) + ($numTimesRefueled * Tracking::TIME_TO_REFUEL_HOURS);
+
+
+		return [ $totalTimeSpent, $numTimesRefueled, $totalDistanceTraveled ];
 	}
 
 	public function getGarageDistance() {

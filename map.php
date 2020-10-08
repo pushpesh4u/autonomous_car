@@ -46,7 +46,7 @@ class CliSetup extends CLI
 			$cal = new MainController( $road_type, $distance );
 			list( $timeSpent, $timeRefuelled, $distanceTravelled ) = $cal->getMetrics();
 
-			$this->success( 'Total time spent on the mapping task : ' . $timeSpent . ' minutes.' );
+			$this->success( 'Total time spent on the mapping task : ' . $timeSpent . ' hours.' );
 			$this->success( 'Number of times refueled : ' . $timeRefuelled );
 			$this->success( 'Total distance travelled : ' . $distanceTravelled );
 		}
