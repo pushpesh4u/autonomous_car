@@ -48,7 +48,7 @@ class RuralController implements RoadInterface {
 	}
 
 	public function getSpeedLimit() {
-		return Tracking::SPEED_LIMIT_KMPH * ( 1 + Tracking::SPEED_LIMIT_RURAL_RELAXATION_PERCENT );
+		return Tracking::SPEED_LIMIT_KMPH * Tracking::SPEED_LIMIT_RURAL_RELAXATION_PERCENT;
 	}
 
 }

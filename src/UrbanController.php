@@ -47,6 +47,6 @@ class UrbanController implements RoadInterface {
 	}
 
 	public function getSpeedLimit() {
-		return Tracking::SPEED_LIMIT_KMPH * 0.75 ;
+		return Tracking::SPEED_LIMIT_KMPH * Tracking::SPEED_LIMIT_URBAN_RELAXATION_PERCENT ;
 	}
 }
