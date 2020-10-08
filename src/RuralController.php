@@ -16,7 +16,12 @@ class RuralController implements RoadInterface {
 		$this->distanceToCover = $distanceToCover;
 		$this->helper = new Helper;
 	}
-
+	
+	/*
+	*@input:void
+	*@output:array
+	*@author:Ravi Ranjan
+	*/
 	public function getMetrics() : array {
 
 
