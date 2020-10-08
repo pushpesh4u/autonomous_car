@@ -30,10 +30,7 @@ class UrbanController implements RoadInterface {
 		$distanceOfRoadFromGarage = $this->getGarageDistance();
 
 		$totalDistanceToTravel = $this->distanceToCover;
-
-		// this is already traveled before starting the mapping
-		$totalDistanceTraveled += $distanceOfRoadFromGarage;
-
+		
 		for( $i = 1; ( $i < $totalDistanceToTravel ) && ( $totalDistanceToTravel > 0 ); $i--, $totalDistanceTraveled++, $totalDistanceToTravel-- ) {
 			if( $totalDistanceTraveled == ( 1 + $numTimesRefueled ) * $this->getDistanceBeforeRefuel() ) {
 				$numTimesRefueled++;
@@ -45,8 +42,8 @@ class UrbanController implements RoadInterface {
 			$totalTimeSpent += round( Tracking::MINUTES_PER_HOUR / $this->getSpeedLimit(), 2 );
 		}
 
-		// this is traveled after the mapping while going back to the garage
-		$totalDistanceTraveled += $distanceOfRoadFromGarage;
+		// this is traveled before and after the mapping while going back to the garage
+		$totalDistanceTraveled += 2 * $distanceOfRoadFromGarage;
 
 		return [ round( $totalTimeSpent, 2 ), $numTimesRefueled, $totalDistanceTraveled ];
 	}
