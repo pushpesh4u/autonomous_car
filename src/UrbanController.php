@@ -10,11 +10,6 @@ class UrbanController implements RoadInterface {
 	 */
 	private $distanceToCover;
 
-	/**
-	 * Car starts with a full tank
-	 */
-	private $fuelStatus = 1;
-
 	public function __construct( int $distanceToCover ) {
 		$this->distanceToCover = $distanceToCover;
 	}
