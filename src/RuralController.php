@@ -33,23 +33,12 @@ class RuralController implements RoadInterface {
 		// Garage to starting point for mapping
 		$distance_car_can_travel_more_without_refuel = Tracking::MAX_TRAVEL_DISTANCE_AFTER_REFUELING - $this->getGarageDistance();
 
-		// if($route == "rural") {
-			// $remaining_mapping_distance = $this->distanceToCover + $this->getTrafficDistanceNeeded($this->distanceToCover , Tracking::RURAL_RANGE_TRAFFIC_DEPRECIATION_PERCENT);	
-			$remaining_mapping_distance = $this->distanceToCover;
-		// } else {
-		// 	$remaining_mapping_distance = $this->distanceToCover + $this->getTrafficDistanceNeeded($this->distanceToCover , Tracking::URBAN_RANGE_TRAFFIC_DEPRECIATION_PERCENT);	
-		// }
-		
+		$remaining_mapping_distance = $this->distanceToCover;
 
 		while($remaining_mapping_distance > 0) {
 
-			echo "$remaining_mapping_distance=" . $remaining_mapping_distance . PHP_EOL;
-			echo "$distance_car_can_travel_more_without_refuel=" . $distance_car_can_travel_more_without_refuel . PHP_EOL;
-
 			// CASE 1 :
 			if($distance_car_can_travel_more_without_refuel > $remaining_mapping_distance) {
-
-				echo "case1" . PHP_EOL;
 				
 				// Travel the remaining disance 
 				$distance_car_can_travel_more_without_refuel -= $remaining_mapping_distance;
@@ -57,61 +46,30 @@ class RuralController implements RoadInterface {
 				// check if we have enuf petrol to reach garage , if not then refuel once again
 				if($distance_car_can_travel_more_without_refuel < $distanceOfRoadFromGarage) {
 					$numTimesRefueled++;
-					echo "refuelling..." . PHP_EOL;
 				}
 
 				break;
 			} else if($distance_car_can_travel_more_without_refuel == $remaining_mapping_distance) { // CASE 2
 
-				echo "case2" . PHP_EOL;
-
 				// We need refuelling to reach to garage
 				$numTimesRefueled++;
-				echo "refuelling..." . PHP_EOL;
 				
 				break;
 			} else { // CASE 3 
-
-				echo "case3" . PHP_EOL;
-				
-				
 
 				/**
 				*	Travel distance that we can before refuel Before Refuel
 				*/
 				$remaining_mapping_distance -= $distance_car_can_travel_more_without_refuel - (Tracking::REFUEL_ROUND_TRIP_DISTANCE / 2);
-				echo "refuelling..." . PHP_EOL;
 				// Refuel 
 				$numTimesRefueled++;
 				$distance_car_can_travel_more_without_refuel = Tracking::MAX_TRAVEL_DISTANCE_AFTER_REFUELING - (Tracking::REFUEL_ROUND_TRIP_DISTANCE / 2);
 			}
-
-			// if($route == "rural") {
-			// 	$remaining_mapping_distance -= $remaining_mapping_distance + $this->getTrafficDistanceNeeded($remaining_mapping_distance , Tracking::RURAL_RANGE_TRAFFIC_DEPRECIATION_PERCENT);	
-			// } else {
-			// 	$remaining_mapping_distance -= $remaining_mapping_distance + $this->getTrafficDistanceNeeded($remaining_mapping_distance , Tracking::URBAN_RANGE_TRAFFIC_DEPRECIATION_PERCENT);	
-			// }
 		}
 
 		$distance_travelled_in_refuelling = ($numTimesRefueled * Tracking::REFUEL_ROUND_TRIP_DISTANCE);
 
 		$totalDistanceTraveled = $this->distanceToCover + (2 * $distanceOfRoadFromGarage) +  $distance_travelled_in_refuelling;
-		echo "==========================" . PHP_EOL;
-		echo $this->getSpeedLimit(). PHP_EOL;
-		echo "==========================" . PHP_EOL;
-
-		// TIME 1
-		echo $this->distanceToCover / $this->getSpeedLimit(). PHP_EOL;
-		// TIME 2
-		echo (2 * $distanceOfRoadFromGarage) / Tracking::SPEED_LIMIT_KMPH . PHP_EOL;
-		// TIME 3
-		echo ($distance_travelled_in_refuelling / $this->getSpeedLimit()). PHP_EOL;
-		// TIME 4 
-		echo $numTimesRefueled * Tracking::TIME_TO_REFUEL_MINS;
-
-
-
-		echo "==========================" . PHP_EOL;
 		$totalTimeSpent = $this->distanceToCover / $this->getSpeedLimit()  + ((2 * $distanceOfRoadFromGarage) / Tracking::SPEED_LIMIT_KMPH) +  ($distance_travelled_in_refuelling / $this->getSpeedLimit()) + ($numTimesRefueled * Tracking::TIME_TO_REFUEL_HOURS);
 
 		return [ round( $totalTimeSpent, 2 ), $numTimesRefueled, $totalDistanceTraveled ];
