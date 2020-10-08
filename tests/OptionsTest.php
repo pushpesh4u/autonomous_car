@@ -2,6 +2,8 @@
 use splitbrain\phpcli\CLI;
 use splitbrain\phpcli\Options;
 
+use Autonomous\Controllers\Constants\Tracking;
+
 class OptionsTestChild extends Options
 {
 
@@ -47,6 +49,32 @@ class OptionsTest extends \PHPUnit\Framework\TestCase
             array('--exclude', 'foo', 'bang--bang'),
         );
     }
+
+	function test_roadType() {
+		$options = new OptionsTestChild();
+		$options->registerOption('road_type', 'Type of road. Can be "rural" or "urban"', '', 'rural|urban');
+
+		$options->args = array('--road_type=urban', 'urban');
+        $options->parseOptions();
+
+		$validRoadTypes = [ Tracking::URBAN_ROAD, Tracking::RURAL_ROAD ];
+
+		$this->assertEquals('urban', $options->getOpt('road_type'));
+        $this->assertEquals(array('urban'), $options->args);
+        $this->assertContains('urban', $options->getOpt('road_type'));
+	}
+
+	function test_roadLength() {
+		$options = new OptionsTestChild();
+		$options->registerOption('road_length', 'Max. distance to travel (in kms)', '', 'distance');
+
+		$options->args = array('--road_length=900', '900');
+        $options->parseOptions();
+
+		$this->assertEquals('900', $options->getOpt('road_length'));
+        $this->assertEquals(array('900'), $options->args);
+        $this->assertFalse($options->getOpt('nothing'));
+	}
 
     function test_simplelong2()
     {
