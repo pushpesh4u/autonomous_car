@@ -34,7 +34,7 @@ class RuralController implements RoadInterface {
 		// discount the distance of the road from the garage. Going from the garage to the road and coming back
 		$distanceOfRoadFromGarage = $this->getGarageDistance();
 
-		$totalDistanceToTravel = $this->distanceToCover - 2 * $distanceOfRoadFromGarage;
+		$totalDistanceToTravel = $this->distanceToCover;	
 
 		// this is already traveled before starting the mapping
 		$totalDistanceTraveled += $distanceOfRoadFromGarage;
