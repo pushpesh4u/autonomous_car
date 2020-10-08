@@ -18,8 +18,6 @@ class RuralController implements RoadInterface {
 		$totalTimeSpent = 0;
 		$numTimesRefueled = 0;
 		$totalDistanceTraveled = 0;
-
-		$route = "rural";
 		/**
 		 * Car starts from a garage.
 		 * At this point, assume the fuel tank is full
